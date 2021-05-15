@@ -8,6 +8,6 @@ import java.util.Set;
 @Entity
 @Table(name = "drivers")
 public class Driver extends Employee{
-    @OneToMany(mappedBy="drivers")
+    @OneToMany(mappedBy="driver")
     private Set<Order> orders;
 }

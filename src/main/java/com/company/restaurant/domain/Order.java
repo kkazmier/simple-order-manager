@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "orders")
 public class Order extends BaseEntity{
     @ManyToOne
-    @JoinColumn(name="id")
+    @JoinColumn(name="driverId", referencedColumnName = "id")
     private Driver driver;
 
     @Column
