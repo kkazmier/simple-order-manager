@@ -1,11 +1,13 @@
 package com.company.restaurant.domain;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public class Employee extends BaseEntity{
-    @Column
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column
+    @Column(name = "last_name")
     private String lastName;
 }
