@@ -4,8 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @MappedSuperclass
 @Getter
 @Setter
@@ -15,6 +13,6 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column
+    @Column(name = "description")
     private String description;
 }
