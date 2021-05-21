@@ -1,0 +1,2 @@
+https://spring.io/guides/gs/handling-form-submission/
+https://github.com/martinwojtus/tutorials/tree/master/thymeleaf
