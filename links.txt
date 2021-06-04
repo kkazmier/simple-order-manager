@@ -1,2 +1,5 @@
 https://spring.io/guides/gs/handling-form-submission/
 https://github.com/martinwojtus/tutorials/tree/master/thymeleaf
+https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp
+https://frontbackend.com/
+https://springhow.com/thymeleaf-form-handling/
