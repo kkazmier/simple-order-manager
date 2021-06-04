@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="#" th:action="@{/order/orderForm}" th:object="${order}" method="post">
+        <p>adres: <input type="text" th:field="*{address}" /></p>
+        <p>status: <input type="text" th:field="*{status}" /></p>
+        <p>rodzaj jedzenia: <input type="text" th:field="*{foodType}" /></p>
+        <p><input type="submit" value="Dodaj zamówienie"/> <input type="reset" value="Wyczyść pola" /></p>
+        <a href="http://localhost:8080/order/orders"><button class="btn btn-default">Anuluj</button></a>
+    </form>
+</body>
+</html>
