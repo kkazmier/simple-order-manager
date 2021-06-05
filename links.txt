@@ -3,3 +3,4 @@ https://github.com/martinwojtus/tutorials/tree/master/thymeleaf
 https://www.w3schools.com/bootstrap/bootstrap_ref_js_modal.asp
 https://frontbackend.com/
 https://springhow.com/thymeleaf-form-handling/
+https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#spring-mvc-test-server-htmlunit
