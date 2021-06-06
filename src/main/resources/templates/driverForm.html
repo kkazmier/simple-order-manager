@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+    <form action="#" th:action="@{/driver/driverForm}" th:object="${driver}" method="post">
+        <p>imię: <input type="text" th:field="*{firstName}"></p>
+        <p>nazwisko: <input type="text" th:field="*{lastName}"></p>
+        <p><input type="submit" value="Dodaj kierowcę"/> <input type="reset" value="Wyczyść pola"></p>
+        <a href="http://localhost:8080/driver/allDrivers"><button class="btn btn-default">Anuluj</button></a>
+    </form>
+</body>
+</html>
