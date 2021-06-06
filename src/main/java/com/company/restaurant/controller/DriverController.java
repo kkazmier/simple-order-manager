@@ -15,8 +15,8 @@ public class DriverController {
 
     @GetMapping("/allDrivers")
     public String getAllDrivers(Model model){
-        model.addAttribute("allDrivers", driverService.getAllDrivers());
-        return "allDrivers";
+        model.addAttribute("drivers", driverService.getAllDrivers());
+        return "drivers";
     }
 
     @GetMapping("/driverForm")
@@ -29,12 +29,12 @@ public class DriverController {
     public String addNewDriver(@ModelAttribute("driver") Driver driver, Model model){
         model.addAttribute("driver", new Driver());
         driverService.saveDriver(driver);
-        return "redirect:drivers";
+        return "redirect:allDrivers";
     }
 
     @GetMapping("/removeDriver/{id}")
     public String removeDriver(@PathVariable("id") Long id){
         driverService.deleteDriverById(id);
-        return "redirect:http://localhost:8080/driver/drivers";
+        return "redirect:http://localhost:8080/driver/allDrivers";
     }
 }
