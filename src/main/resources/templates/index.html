@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://thymeleaf.org">
+<html lang="pl">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
     <title>Simple order manager main page</title>
 <!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
 <!--    <link rel="stylesheet" th:href="@{/main.css}"/>-->
@@ -13,6 +17,6 @@
     <h2>Main</h2>
 
     <a href="orders.html" th:href="@{http://localhost:8080/order/orders}"><button class="button">Zamowienia</button></a>
-
+    <a href="drivers.html" th:href="@{http://localhost:8080/driver/allDrivers}"><button class="button">Kierowcy</button></a>
 </body>
 </html>
