@@ -10,11 +10,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Order extends BaseEntity{
-
-    @ManyToOne
-    @JoinColumn(name="driver_id", referencedColumnName = "id")
-    private Driver driver;
-
     @Column(name = "adress")
     private String address;
 
@@ -23,4 +18,8 @@ public class Order extends BaseEntity{
 
     @Column(name = "status")
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name="driver_id", referencedColumnName = "id")
+    private Driver driver;
 }
