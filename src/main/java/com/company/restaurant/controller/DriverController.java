@@ -1,7 +1,9 @@
 package com.company.restaurant.controller;
 
 import com.company.restaurant.domain.Driver;
+import com.company.restaurant.domain.Order;
 import com.company.restaurant.service.DriverServiceImpl;
+import com.company.restaurant.service.OrderServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("driver")
 public class DriverController {
     private final DriverServiceImpl driverService;
+    private final OrderServiceImpl orderService;
 
     @GetMapping("/allDrivers")
     public String getAllDrivers(Model model){
@@ -35,6 +38,16 @@ public class DriverController {
     @GetMapping("/removeDriver/{id}")
     public String removeDriver(@PathVariable("id") Long id){
         driverService.deleteDriverById(id);
+        return "redirect:http://localhost:8080/driver/allDrivers";
+    }
+
+    @GetMapping("/addOrder/{orderId}/toDriver/{driverId}")
+    public String addOrderToDriver(@PathVariable("orderId") Long orderId, @PathVariable("driverId") Long driverId) throws Exception {
+        Driver driver = driverService.findDriverById(driverId).orElseThrow(Exception::new);
+        Order order = orderService.findOrderById(orderId).orElseThrow(Exception::new);
+        driver.getOrders().add(order);
+        order.setDriver(driver);
+        driverService.saveDriver(driver);
         return "redirect:http://localhost:8080/driver/allDrivers";
     }
 }
