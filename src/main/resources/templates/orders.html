@@ -68,11 +68,11 @@
             <td th:text="${o.description}"></td>
             <td th:text="${o.foodType}"></td>
             <td th:text="${o.status}"></td>
-            <td>...</td>
+            <td th:text="${o.driver}!=null ? (${o.driver.firstName} + ' ' + ${o.driver.lastName}) : 'brak przypisanego kierowcy'"></td>
             <td><a th:href="@{http://localhost:8080/order/removeOrder/{id}(id=${o.id})}">
                 <button type="button" class="btn btn-danger">Usuń</button></a>
             </td>
         </tr>
-    </table>
+    </table>2
 </body>
 </html>
