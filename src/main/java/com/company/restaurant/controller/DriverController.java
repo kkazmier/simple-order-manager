@@ -48,6 +48,6 @@ public class DriverController {
         driver.getOrders().add(order);
         order.setDriver(driver);
         driverService.saveDriver(driver);
-        return "redirect:http://localhost:8080/driver/allDrivers";
+        return "redirect:http://localhost:8080/order/orders";
     }
 }
