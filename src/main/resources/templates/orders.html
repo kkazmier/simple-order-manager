@@ -69,10 +69,15 @@
             <td th:text="${o.foodType}"></td>
             <td th:text="${o.status}"></td>
             <td th:text="${o.driver}!=null ? (${o.driver.firstName} + ' ' + ${o.driver.lastName}) : 'brak przypisanego kierowcy'"></td>
-            <td><a th:href="@{http://localhost:8080/order/removeOrder/{id}(id=${o.id})}">
-                <button type="button" class="btn btn-danger">Usuń</button></a>
+            <td>
+                <div>
+                    <a th:href="@{http://localhost:8080/order/removeOrder/{id}(id=${o.id})}">
+                        <button type="button" class="btn btn-danger">Usuń</button></a>
+                    <a th:href="@{http://localhost:8080/order/addOrder/{orderId}/toDriver(orderId=${o.id})}">
+                        <button type="button" class="btn btn-primary">Przypisz kierowcę</button></a>
+                </div>
             </td>
         </tr>
-    </table>2
+    </table>
 </body>
 </html>
