@@ -1,6 +1,7 @@
 package com.company.restaurant.controller;
 
 import com.company.restaurant.domain.Order;
+import com.company.restaurant.service.DriverServiceImpl;
 import com.company.restaurant.service.OrderServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequestMapping("order")
 public class OrderController {
     private final OrderServiceImpl orderService;
+    private final DriverServiceImpl driverService;
 
     @ModelAttribute("allOrders")
     public List<Order> getOrdersList(){
@@ -78,5 +80,12 @@ public class OrderController {
     @GetMapping(value = "editOrder/{id}")
     public String editOrder(@PathVariable("id") long id){
         return "redirect:http://localhost:8080/order/orders";
+    }
+
+    @GetMapping("/addOrder/{orderId}/toDriver")
+    public String addOrderToDriver(@PathVariable("orderId") long orderId, Model model){
+        model.addAttribute("drivers", driverService.getAllDrivers());
+        model.addAttribute("selectedOrder", orderId);
+        return "addOrderToDriver";
     }
 }
