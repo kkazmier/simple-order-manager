@@ -4,6 +4,8 @@ import com.company.restaurant.domain.Order;
 import com.company.restaurant.service.DriverServiceImpl;
 import com.company.restaurant.service.OrderServiceImpl;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import java.util.List;
 @Controller
 @RequestMapping("order")
 public class OrderController {
+    private final Logger logger = LoggerFactory.getLogger(OrderController.class);
+
     private final OrderServiceImpl orderService;
     private final DriverServiceImpl driverService;
 
@@ -22,8 +26,6 @@ public class OrderController {
     public List<Order> getOrdersList(){
         return orderService.getAllOrders();
     }
-
-
 
     @GetMapping("/all")
     public List<Order> getAllOrders(){
@@ -58,7 +60,7 @@ public class OrderController {
     public String addNewOrder(@ModelAttribute("order") Order order, Model model){
         model.addAttribute("order", new Order());
         orderService.saveOrder(order);
-        System.out.println("New order added.");
+        logger.info("New order added.");
         return "redirect:orders";
     }
 
@@ -72,8 +74,8 @@ public class OrderController {
 
     @RequestMapping(value = "removeOrder/{id}", method = RequestMethod.GET)
     public String removeOrder(@PathVariable("id") long id){
-        System.out.println("Try remove order having id: " + id);
         orderService.deleteOrderById(id);
+        logger.info("Try remove order having id: " + id);
         return "redirect:http://localhost:8080/order/orders";
     }
 
@@ -86,6 +88,7 @@ public class OrderController {
     public String addOrderToDriver(@PathVariable("orderId") long orderId, Model model){
         model.addAttribute("drivers", driverService.getAllDrivers());
         model.addAttribute("selectedOrder", orderId);
+        logger.info("Add order " + orderId + " to driver." );
         return "addOrderToDriver";
     }
 }
