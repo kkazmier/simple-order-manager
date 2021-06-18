@@ -1,6 +1,8 @@
 package com.company.restaurant.controller;
 
+import com.company.restaurant.domain.Address;
 import com.company.restaurant.domain.Order;
+import com.company.restaurant.service.AddressServiceImpl;
 import com.company.restaurant.service.DriverServiceImpl;
 import com.company.restaurant.service.OrderServiceImpl;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ public class OrderController {
     private final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     private final OrderServiceImpl orderService;
+    private final AddressServiceImpl addressService;
     private final DriverServiceImpl driverService;
 
     @ModelAttribute("allOrders")
@@ -52,15 +55,20 @@ public class OrderController {
 
     @GetMapping(value = "orderForm")
     public String orderForm(Model model){
-        model.addAttribute("order", new Order());
+        Order order = new Order();
+        Address address = new Address();
+        address.setStreet("...");
+//        address.setOrder(order);
+//        order.setAddress(address);
+        model.addAttribute("order", order);
+        model.addAttribute("address", address);
         return "orderForm";
     }
 
     @PostMapping(value = "orderForm")
-    public String addNewOrder(@ModelAttribute("order") Order order, Model model){
-        model.addAttribute("order", new Order());
+    public String addNewOrder(@ModelAttribute("order") Order order, @ModelAttribute("address") Address address, Model model){
+        addressService.save(address);
         orderService.saveOrder(order);
-        logger.info("New order added.");
         return "redirect:orders";
     }
 
