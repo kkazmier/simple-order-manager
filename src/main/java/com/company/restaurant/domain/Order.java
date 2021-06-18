@@ -10,8 +10,9 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class Order extends BaseEntity{
-    @Column(name = "adress")
-    private String address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "addressId", referencedColumnName = "id")
+    private Address address;
 
     @Column(name = "food_type")
     private String foodType;
@@ -20,6 +21,6 @@ public class Order extends BaseEntity{
     private String status;
 
     @ManyToOne
-    @JoinColumn(name="driver_id", referencedColumnName = "id")
+    @JoinColumn(name="driverId", referencedColumnName = "id")
     private Driver driver;
 }
