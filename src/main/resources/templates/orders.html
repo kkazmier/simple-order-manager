@@ -52,7 +52,7 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Id</th>
             <th>Adres</th>
@@ -64,7 +64,12 @@
         </tr>
         <tr th:each="o : ${orders}">
             <td th:text="${o.id}"></td>
-            <td th:text="${o.address}"></td>
+            <td>
+                <div>
+                    <p th:text="${o.address}!=null ? (${o.address.street} + ' ' + ${o.address.buildingNumber}) : ' '"></p>
+                    <p></p>
+                </div>
+            </td>
             <td th:text="${o.description}"></td>
             <td th:text="${o.foodType}"></td>
             <td th:text="${o.status}"></td>
