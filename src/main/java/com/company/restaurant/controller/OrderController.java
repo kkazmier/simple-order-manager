@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -67,6 +68,13 @@ public class OrderController {
 
     @PostMapping(value = "orderForm")
     public String addNewOrder(@ModelAttribute("order") Order order, @ModelAttribute("address") Address address, Model model){
+        LocalTime time = LocalTime.now();
+        
+        logger.info(time.toString());
+        order.setCreateTime(time);
+        order.setTimeToDelivery(time.plusMinutes(90));
+        order.setCloseTime(time.plusMinutes(90));
+        order.setSecondsToDelivery(time.plusMinutes(90).toSecondOfDay());
         addressService.save(address);
         orderService.saveOrder(order);
         return "redirect:orders";
