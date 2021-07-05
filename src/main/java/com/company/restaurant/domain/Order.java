@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "orders")
@@ -38,4 +39,8 @@ public class Order extends BaseEntity{
     @ManyToOne
     @JoinColumn(name="driverId", referencedColumnName = "id")
     private Driver driver;
+
+    public Long secondsToDelivery(){
+        return LocalTime.now().until(timeToDelivery, ChronoUnit.SECONDS);
+    }
 }
