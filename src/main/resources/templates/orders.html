@@ -15,45 +15,6 @@
     <a href="orderForm.html" th:href="@{http://localhost:8080/order/orderForm}"><button type="button" class="btn btn-primary btn-lg">Nowe zamówienie</button></a>
     <h1>Zamówienia</h1>
 
-
-
-<!--    <button type="submit" name="addOrder">Nowe zamówienie</button>-->
-    <!-- Trigger the modal with a button -->
-<!--    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#newOrder">Nowe zamówienie</button>-->
-
-    <!-- Modal -->
-<!--    <div id="newOrder" class="modal fade" role="dialog">-->
-<!--        <div class="modal-dialog">-->
-
-<!--            &lt;!&ndash; Modal content&ndash;&gt;-->
-<!--            <div class="modal-content">-->
-<!--                <div class="newOrder">-->
-<!--                    <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-<!--                    <h4 class="modal-title">Nowe zamówienie</h4>-->
-<!--                </div>-->
-
-<!--                <div class="modal-body">-->
-<!--                    <form th:action="@{/order/addNewOrder}" th:object="${newOrder}" method="post">-->
-<!--                        <p>...</p>-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="description">Description:</label>-->
-<!--                            <input type="text" class="form-control" id="description" th:value="*{description}"/>-->
-<!--                        </div>-->
-<!--                        <input type="submit" value="Zapisz"/>-->
-<!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>-->
-<!--                    </form>-->
-<!--                </div>-->
-
-<!--&lt;!&ndash;                <div class="modal-footer">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <button type="button" class="btn btn-primary" th:action="@{/addOrder}" th:object="${order}" th:href="@{/order/orders}" method="post">Utwórz</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <button type="submit" class="btn btn-primary" th:href="@{/}">Utwórz</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--            </div>-->
-
-<!--        </div>-->
-<!--    </div>-->
-
     <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Id</th>
@@ -61,7 +22,7 @@
             <th>Uwagi</th>
             <th>Rodzaj jedzenia</th>
             <th>Czas przyjęcia do realizacji</th>
-            <th>Czas do dostarczenia</th>
+            <th>Czas pozostały do dostarczenia</th>
             <th>Czas zamknięcia</th>
             <th>Status</th>
             <th>Kierowca</th>
@@ -83,45 +44,24 @@
 
             <td>
                 <p th:id="'timer-'+${stat.count}"></p>
-                <script>
-                    // Set the date we're counting down to
-                    // var deliveryTime = new Date([[${o.timeToDelivery}]]).getTime();
-                    //console.log("delivery date: " + /*[[${o.timeToDelivery}]]*/);
-                    //console.log([[${o.timeToDelivery}]]);
-                    //var deliveryTime = new Date().getTime() + 10000;
+                <script th:inline="javascript">
+                    var secondsToDelivery  = [[${o.secondsToDelivery()}]];
+                    var orderIndex = [[${stat.count}]];
+                    var x = setInterval(setTime(orderIndex, secondsToDelivery--), 1000);
 
-
-
-                    var deliveryTime = [[${o.secondsToDelivery}]];
-                    //deliveryTime *= 1000000000;
-
-                    // Update the count down every 1 second
-                    var x = setInterval(function() {
-                        var index = [[${stat.count}]];
-                        //console.log(index);
-                        // Get today's date and time
-                        var now = new Date().getTime()/1000000000;
-                        // console.log('time to delivery' + [[${o.secondsToDelivery}]]);
-                        // console.log('now time' + now);
-                        // Find the distance between now and the count down date
-                        var distance = deliveryTime - now;
-
-                        // Time calculations for days, hours, minutes and seconds
-                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                        // Display the result in the element with id="demo"
-                        //console.log("timer id: "+'timer-'+index);
-                        document.getElementById('timer-'+index).innerHTML =hours + ":"
+                    function setTime(orderIndex, secondsToDelivery){
+                        var hours = Math.floor((secondsToDelivery / 3600));
+                        var minutes = Math.floor((secondsToDelivery % (3600)) / (60));
+                        var seconds = Math.floor(secondsToDelivery % 60);
+                        // console.log('h: ' + hours);
+                        // console.log('m' + minutes);
+                        // console.log('s' + seconds);
+                        document.getElementById('timer-'+orderIndex).innerHTML =hours + ":"
                             + minutes + ":" + seconds;
 
-                        // If the count down is finished, write some text
-                        if (distance < 0) {
+                        secondsToDelivery--;
+                    }
 
-                        }
-                    }, 1000);
                 </script>
 
             </td>
@@ -140,6 +80,10 @@
                 </div>
             </td>
         </tr>
+        <script>
+
+        </script>
+
     </table>
 
 
