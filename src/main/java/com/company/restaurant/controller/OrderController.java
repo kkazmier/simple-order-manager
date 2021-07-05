@@ -72,9 +72,8 @@ public class OrderController {
         
         logger.info(time.toString());
         order.setCreateTime(time);
-        order.setTimeToDelivery(time.plusMinutes(90));
-        order.setCloseTime(time.plusMinutes(90));
-        order.setSecondsToDelivery(time.plusMinutes(90).toSecondOfDay());
+        order.setTimeToDelivery(time.plusSeconds(order.getSecondsToDelivery()));
+        order.setCloseTime(time.plusMinutes(120));
         addressService.save(address);
         orderService.saveOrder(order);
         return "redirect:orders";
