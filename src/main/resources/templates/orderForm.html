@@ -8,14 +8,27 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="#" th:action="@{/order/orderForm}" th:object="${order}" method="post">
+    <form id="newOrderForm" action="#" th:action="@{/order/orderForm}" th:object="${order}" method="post">
         <p>Ulica: <input type="text" th:field="*{address.street}"></p>
         <p>Numer budynku: <input type="text" th:field="*{address.buildingNumber}"></p>
         <p>Numer mieszkania: <input type="text" th:field="*{address.flatNumber}"></p>
         <p>------------------------------------------------------</p>
         <p>status: <input type="text" th:field="*{status}"></p>
         <p>rodzaj jedzenia: <input type="text" th:field="*{foodType}" /></p>
-        <p><input type="submit" value="Dodaj zamówienie"> <input type="reset" value="Wyczyść pola" /></p>
+        <label>Czas dostawy</label>
+        <div>
+            <input type="radio" id="thirty" name="deliveryTime" value=1800 th:field="*{secondsToDelivery}">
+            <label for="thirty">30 minut</label>
+        </div>
+        <div>
+            <input type="radio" id="sixty" name="deliveryTime" value=3600 th:field="*{secondsToDelivery}">
+            <label for="sixty">60 minut</label>
+        </div>
+        <div>
+            <input type="radio" id="ninety" name="deliveryTime" value=5400 th:field="*{secondsToDelivery}" checked = "true">
+            <label for="ninety">90 minut</label>
+        </div>
+        <p><input id="submitNewOrder" type="submit" value="Dodaj zamówienie"> <input type="reset" value="Wyczyść pola" /></p>
         <a href="http://localhost:8080/order/orders"><button class="btn btn-default">Anuluj</button></a>
     </form>
 </body>
