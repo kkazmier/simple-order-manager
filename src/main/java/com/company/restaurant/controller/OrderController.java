@@ -69,7 +69,6 @@ public class OrderController {
     @PostMapping(value = "orderForm")
     public String addNewOrder(@ModelAttribute("order") Order order, @ModelAttribute("address") Address address, Model model){
         LocalTime time = LocalTime.now();
-        
         logger.info(time.toString());
         order.setCreateTime(time);
         order.setTimeToDelivery(time.plusSeconds(order.getSecondsToDelivery()));
