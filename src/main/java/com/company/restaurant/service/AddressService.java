@@ -10,4 +10,5 @@ public interface AddressService {
     List<Address> findAll();
     Optional<Address> findById(Long id);
     void deleteById(Long id);
+    void setGeographicalCoords(Long id) throws Exception;
 }
