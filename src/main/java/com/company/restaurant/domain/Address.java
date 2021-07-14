@@ -22,6 +22,33 @@ public class Address extends BaseEntity {
     @Column(name = "floor")
     String floor;
 
+    @Column(name = "town")
+    String town;
+
+    @Column(name = "postalCode")
+    String postalCode;
+
+    @Column(name = "latitude")
+    String latitude;
+
+    @Column(name = "longitude")
+    String longitude;
+
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private Order order;
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "street='" + street + '\'' +
+                ", buildingNumber='" + buildingNumber + '\'' +
+                ", flatNumber='" + flatNumber + '\'' +
+                ", floor='" + floor + '\'' +
+                ", town='" + town + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", order=" + order +
+                '}';
+    }
 }
