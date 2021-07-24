@@ -1,5 +1,6 @@
 package com.company.restaurant.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,6 +36,7 @@ public class Address extends BaseEntity {
     String longitude;
 
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Order order;
 
     @Override

@@ -1,5 +1,6 @@
 package com.company.restaurant.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,13 +16,14 @@ import java.time.temporal.ChronoUnit;
 public class Order extends BaseEntity{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressId", referencedColumnName = "id")
+    @JsonBackReference
     private Address address;
 
     @Column(name = "food_type")
     private String foodType;
 
     @Column(name = "status")
-    private String status;
+    private OrderStatus status;
 
     @Column(name = "createTime")
     private LocalTime createTime;
@@ -37,6 +39,7 @@ public class Order extends BaseEntity{
     private LocalTime closeTime;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="driverId", referencedColumnName = "id")
     private Driver driver;
 
