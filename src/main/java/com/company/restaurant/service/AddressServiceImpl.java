@@ -3,6 +3,7 @@ package com.company.restaurant.service;
 import com.company.restaurant.domain.Address;
 import com.company.restaurant.domain.GeoResponse;
 import com.company.restaurant.repository.AddressRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,8 @@ import java.util.Optional;
 public class AddressServiceImpl implements AddressService{
     private final Logger logger = LoggerFactory.getLogger(AddressServiceImpl.class);
     private final AddressRepository addressRepository;
+    private final RestTemplate restTemplate = new RestTemplate();
+    private final ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     public Address save(Address address) {
         logger.info("Address saved.");
@@ -47,8 +50,6 @@ public class AddressServiceImpl implements AddressService{
         logger.info(url);
 //        final WebClient webClient = WebClient.create(url);
 //        Mono<JSONObject> geoResponse = webClient.get().accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(JSONObject.class);
-        RestTemplate restTemplate = new RestTemplate();
-        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         String locationResponse = restTemplate.getForObject(url, String.class);
         GeoResponse[] geoResponses = mapper.readValue(locationResponse, GeoResponse[].class);
         logger.info(geoResponses[0].toString());
@@ -56,5 +57,19 @@ public class AddressServiceImpl implements AddressService{
         address.setLatitude(geoResponses[0].getLat());
         save(address);
         logger.info(findById(id).orElseThrow(Exception::new).toString());
+    }
+
+    @Override
+    public Address setGeographicalCoords(Address address) throws JsonProcessingException {
+        String url = "https://eu1.locationiq.com/v1/search.php?key=pk.c5f4b42b05bfdb2f033d3be0590472cd&q="
+                + address.getStreet() + "," + address.getBuildingNumber() + "," + address.getTown() + "&format=json";
+        RestTemplate restTemplate = new RestTemplate();
+        String locationResponse = restTemplate.getForObject(url, String.class);
+        GeoResponse[] geoResponses = mapper.readValue(locationResponse, GeoResponse[].class);
+        logger.info(geoResponses[0].toString());
+        address.setLongitude(geoResponses[0].getLon());
+        address.setLatitude(geoResponses[0].getLat());
+        logger.info("Set coords: " + geoResponses[0].getLon() + ", " + geoResponses[0].getLat());
+        return address;
     }
 }
