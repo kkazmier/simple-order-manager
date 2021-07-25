@@ -39,7 +39,6 @@
             <td th:text="${o.description}"></td>
             <td th:text="${o.foodType}"></td>
 
-<!--            <td th:text="${o.createTime}"></td>-->
             <td th:text="${o.createTime}"></td>
 
             <td>
@@ -77,6 +76,8 @@
                         <button type="button" class="btn btn-danger">Usuń</button></a>
                     <a th:href="@{http://localhost:8080/order/addOrder/{orderId}/toDriver(orderId=${o.id})}">
                         <button type="button" class="btn btn-primary">Przypisz kierowcę</button></a>
+                    <a th:href="@{http://localhost:8080/order/setStatusToClose/{id}(id=${o.id})}">
+                        <button type="button" class="btn btn-primary">Zakończ zamówienie</button></a>
                 </div>
             </td>
         </tr>
