@@ -20,19 +20,83 @@
 </head>
 <body>
     <a href="index.html" th:href="@{http://localhost:8080/}"><button type="button" class="btn btn-primary btn-lg">Strona główna</button></a>
+<!--    <a href="index.html" th:href="@{http://localhost:8080/}"><button type="button" class="btn btn-primary btn-lg">Wszystkie zamówienia</button></a>-->
+
+    <button class="btn btn-primary btn-lg" onclick="getNewOrders()">Nowe zamówienia</button>
+    <button class="btn btn-primary btn-lg" onclick="getClosedOrders()">Zamknięte zamówienia</button>
+    <button class="btn btn-primary btn-lg" onclick="getAllOrders()">Wszystkie zamówienia</button>
+
+    <h1 id="mapTitle">Pusta mapa</h1>
 
     <div id="mapid"></div>
 
 
-    <script >
+    <script th:inline="javascript">
         const locationiqToken = "pk.c5f4b42b05bfdb2f033d3be0590472cd";
         var map = L.map('mapid').setView([52.2368396, 21.1057222], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        //var size = [[${allAddressesArray}]].length;
-        //console.log(size);
-        // var points ;
+        var allOrders;
+        var completedOrders;
+
+        function getNewOrders() {
+            map.eachLayer(function (layer) {
+                map.removeLayer(layer);
+            });
+            document.getElementById("mapTitle").innerText = "Nowe zamówienia";
+            var points = Array.from([[${newOrderPoints}]]);
+            var size = points.length;
+            var markers = new Array(size);
+            for (i=0; i<size; i++){
+                var address = points[i].street + " " + points[i].buildingNumber;
+                markers[i] = L.marker([points[i].latitude, points[i].longitude]);
+                markers[i].bindPopup(address);
+            }
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            allOrders = L.layerGroup(markers).addTo(map);
+        }
+
+        function getAllOrders() {
+            map.eachLayer(function (layer) {
+                map.removeLayer(layer);
+            });
+            document.getElementById("mapTitle").innerText = "Wszystkie zamówienia";
+            var points = Array.from([[${allOrderPoints}]]);
+            var size = points.length;
+            var markers = new Array(size);
+            for (i=0; i<size; i++){
+                var address = points[i].street + " " + points[i].buildingNumber + " " + points[i].driverFirstName + " " + points[i].driverLastName;
+                markers[i] = L.marker([points[i].latitude, points[i].longitude]);
+                markers[i].bindPopup(address);
+            }
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            allOrders = L.layerGroup(markers).addTo(map);
+        }
+
+        function getClosedOrders() {
+            map.eachLayer(function (layer) {
+                map.removeLayer(layer);
+            });
+            document.getElementById("mapTitle").innerText = "Zamknięte zamówienia";
+            var points = Array.from([[${completedOrderPoints}]]);
+            var size = points.length;
+            var markers = new Array(size);
+            for (i=0; i<size; i++){
+                var address = points[i].street + " " + points[i].buildingNumber + " " + points[i].driverFirstName + " " + points[i].driverLastName;
+                markers[i] = L.marker([points[i].latitude, points[i].longitude]);
+                markers[i].bindPopup(address);
+            }
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            completedOrders = L.layerGroup(markers).addTo(map);
+        }
+
     </script>
 
 </body>
