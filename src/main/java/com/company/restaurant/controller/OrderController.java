@@ -2,6 +2,7 @@ package com.company.restaurant.controller;
 
 import com.company.restaurant.domain.Address;
 import com.company.restaurant.domain.Order;
+import com.company.restaurant.domain.OrderStatus;
 import com.company.restaurant.service.AddressServiceImpl;
 import com.company.restaurant.service.DriverServiceImpl;
 import com.company.restaurant.service.OrderServiceImpl;
@@ -31,7 +32,7 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
-    @GetMapping("/all")
+    @GetMapping(name = "all")
     public List<Order> getAllOrders(){
         return orderService.getAllOrders();
     }
@@ -69,10 +70,10 @@ public class OrderController {
     @PostMapping(value = "orderForm")
     public String addNewOrder(@ModelAttribute("order") Order order, @ModelAttribute("address") Address address, Model model){
         LocalTime time = LocalTime.now();
-        logger.info(time.toString());
+        logger.info(address.toString());
         order.setCreateTime(time);
         order.setTimeToDelivery(time.plusSeconds(order.getSecondsToDelivery()));
-        order.setCloseTime(time.plusMinutes(120));
+        order.setStatus(OrderStatus.NEW);
         addressService.save(address);
         orderService.saveOrder(order);
         return "redirect:orders";
@@ -99,10 +100,18 @@ public class OrderController {
     }
 
     @GetMapping("/addOrder/{orderId}/toDriver")
-    public String addOrderToDriver(@PathVariable("orderId") long orderId, Model model){
+    public String addOrderToDriver(@PathVariable("orderId") long orderId, Model model) throws Exception {
+        orderService.findOrderById(orderId).get().setStatus(OrderStatus.ASSIGNED);
         model.addAttribute("drivers", driverService.getAllDrivers());
         model.addAttribute("selectedOrder", orderId);
         logger.info("Add order " + orderId + " to driver." );
         return "addOrderToDriver";
+    }
+
+    @RequestMapping(value = "setStatusToClose/{id}", method = RequestMethod.GET)
+    public String setStatusToCompleted(@PathVariable("id") long id) throws Exception {
+        orderService.findOrderById(id).get().setStatus(OrderStatus.COMPLETED);
+        logger.info("Order " + id + " status: " + orderService.findOrderById(id).get().getStatus());
+        return "redirect:http://localhost:8080/order/orders";
     }
 }
