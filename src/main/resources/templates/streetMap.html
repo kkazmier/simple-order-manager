@@ -33,12 +33,39 @@
 
     <script th:inline="javascript">
         const locationiqToken = "pk.c5f4b42b05bfdb2f033d3be0590472cd";
+        const burgerIcon = 'http://localhost:8080/img/burger.png';
+        const pizzaIcon = 'http://localhost:8080/img/pizza.png';
+        const sushiIcon = 'http://localhost:8080/img/sushi.png';
         var map = L.map('mapid').setView([52.2368396, 21.1057222], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
         var allOrders;
         var completedOrders;
+
+        var burgerMarker = L.icon({
+            iconUrl: burgerIcon,
+            iconSize:     [38, 95], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        var pizzaMarker = L.icon({
+            iconUrl: pizzaIcon,
+            iconSize:     [38, 95], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        var sushiMarker = L.icon({
+            iconUrl: sushiIcon,
+            iconSize:     [38, 95], // size of the icon
+            shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
 
         function getNewOrders() {
             map.eachLayer(function (layer) {
@@ -50,8 +77,17 @@
             var markers = new Array(size);
             for (i=0; i<size; i++){
                 var address = points[i].street + " " + points[i].buildingNumber;
-                markers[i] = L.marker([points[i].latitude, points[i].longitude]);
-                markers[i].bindPopup(address);
+                console.log(address);
+                const foodType = points[i].foodType;
+                switch (foodType) {
+                    case 'BURGER': markers[i] = L.marker([points[i].latitude, points[i].longitude], {icon: burgerMarker}).bindPopup(address);
+                    break;
+                    case 'PIZZA': markers[i] = L.marker([points[i].latitude, points[i].longitude], {icon: pizzaMarker}).bindPopup(address);
+                    break;
+                    case 'SUSHI': markers[i] = L.marker([points[i].latitude, points[i].longitude], {icon: sushiMarker}).bindPopup(address);
+                    break;
+                }
+
             }
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -68,9 +104,16 @@
             var size = points.length;
             var markers = new Array(size);
             for (i=0; i<size; i++){
-                var address = points[i].street + " " + points[i].buildingNumber + " " + points[i].driverFirstName + " " + points[i].driverLastName;
-                markers[i] = L.marker([points[i].latitude, points[i].longitude]);
-                markers[i].bindPopup(address);
+                var address = points[i].street + " " + points[i].buildingNumber;
+                const foodType = points[i].foodType;
+                switch (foodType) {
+                    case 'BURGER': markers[i] = L.marker([points[i].latitude, points[i].longitude], {icon: burgerMarker}).bindPopup(address);
+                        break;
+                    case 'PIZZA': markers[i] = L.marker([points[i].latitude, points[i].longitude], {icon: pizzaMarker}).bindPopup(address);
+                        break;
+                    case 'SUSHI': markers[i] = L.marker([points[i].latitude, points[i].longitude], {icon: sushiMarker}).bindPopup(address);
+                        break;
+                }
             }
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -87,9 +130,16 @@
             var size = points.length;
             var markers = new Array(size);
             for (i=0; i<size; i++){
-                var address = points[i].street + " " + points[i].buildingNumber + " " + points[i].driverFirstName + " " + points[i].driverLastName;
-                markers[i] = L.marker([points[i].latitude, points[i].longitude]);
-                markers[i].bindPopup(address);
+                var address = points[i].street + " " + points[i].buildingNumber;
+                const foodType = points[i].foodType;
+                switch (foodType) {
+                    case 'BURGER': markers[i] = L.marker([points[i].latitude, points[i].longitude], {icon: burgerMarker}).bindPopup(address);
+                        break;
+                    case 'PIZZA': markers[i] = L.marker([points[i].latitude, points[i].longitude], {icon: pizzaMarker}).bindPopup(address);
+                        break;
+                    case 'SUSHI': markers[i] = L.marker([points[i].latitude, points[i].longitude], {icon: sushiMarker}).bindPopup(address);
+                        break;
+                }
             }
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
