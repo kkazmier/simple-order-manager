@@ -52,6 +52,7 @@ public class OrderPointServiceImpl implements OrderPointService{
             orderPoint.setDriverFirstName(driver.getFirstName());
             orderPoint.setDriverLastName(driver.getLastName());
             orderPoint.setStatus(order.getStatus());
+            orderPoint.setFoodType(order.getFoodType());
             logger.info(orderPoint.toString());
             orderPoints.add(orderPoint);
         });
