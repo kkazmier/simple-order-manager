@@ -14,6 +14,7 @@ public class OrderPoint {
     private String driverFirstName;
     private String driverLastName;
     private OrderStatus status;
+    private String foodType;
 
     @Override
     public String toString() {
@@ -25,7 +26,8 @@ public class OrderPoint {
                 ", secondsToDelivery=" + secondsToDelivery +
                 ", driverFirstName='" + driverFirstName + '\'' +
                 ", driverLastName='" + driverLastName + '\'' +
-                ", status='" + status + '\'' +
+                ", status=" + status +
+                ", foodType='" + foodType + '\'' +
                 '}';
     }
 }
