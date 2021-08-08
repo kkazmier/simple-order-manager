@@ -11,8 +11,8 @@
 
 </head>
 <body>
-    <a href="index.html" th:href="@{http://localhost:8080/}"><button type="button" class="btn btn-primary btn-lg">Strona główna</button></a>
-    <a href="orderForm.html" th:href="@{http://localhost:8080/order/orderForm}"><button type="button" class="btn btn-primary btn-lg">Nowe zamówienie</button></a>
+    <a href="index.html" th:href="@{/}"><button type="button" class="btn btn-primary btn-lg">Strona główna</button></a>
+    <a href="orderForm.html" th:href="@{/order/orderForm}"><button type="button" class="btn btn-primary btn-lg">Nowe zamówienie</button></a>
     <h1>Zamówienia</h1>
 
     <table class="table table-striped table-bordered table-hover">
@@ -72,11 +72,11 @@
             <td th:text="${o.driver}!=null ? (${o.driver.firstName} + ' ' + ${o.driver.lastName}) : 'brak przypisanego kierowcy'"></td>
             <td>
                 <div>
-                    <a th:href="@{http://localhost:8080/order/removeOrder/{id}(id=${o.id})}">
+                    <a th:href="@{/order/removeOrder/{id}(id=${o.id})}">
                         <button type="button" class="btn btn-danger">Usuń</button></a>
-                    <a th:href="@{http://localhost:8080/order/addOrder/{orderId}/toDriver(orderId=${o.id})}">
+                    <a th:href="@{/order/addOrder/{orderId}/toDriver(orderId=${o.id})}">
                         <button type="button" class="btn btn-primary">Przypisz kierowcę</button></a>
-                    <a th:href="@{http://localhost:8080/order/setStatusToClose/{id}(id=${o.id})}">
+                    <a th:href="@{/order/setStatusToClose/{id}(id=${o.id})}">
                         <button type="button" class="btn btn-primary">Zakończ zamówienie</button></a>
                 </div>
             </td>

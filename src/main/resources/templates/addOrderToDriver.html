@@ -11,8 +11,8 @@
 
 <body>
     <div class="list-group" th:each="d : ${drivers}">
-        <a th:href="@{http://localhost:8080/driver/addOrder/{orderId}/toDriver/{driverId}((orderId=${selectedOrder}),(driverId=${d.id}))}" class="list-group-item list-group-item-action"><label th:text="${d.firstName} + ' ' + ${d.lastName}"></label></a>
+        <a th:href="@{/driver/addOrder/{orderId}/toDriver/{driverId}((orderId=${selectedOrder}),(driverId=${d.id}))}" class="list-group-item list-group-item-action"><label th:text="${d.firstName} + ' ' + ${d.lastName}"></label></a>
     </div>
-    <a href="http://localhost:8080/driver/allDrivers"><button class="btn btn-primary">Anuluj</button></a>
+    <a href="/driver/allDrivers"><button class="btn btn-primary">Anuluj</button></a>
 </body>
 </html>
