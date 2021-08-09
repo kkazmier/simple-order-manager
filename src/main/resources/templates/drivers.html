@@ -12,13 +12,11 @@
     <h1>Kierowcy</h1>
     <table class="table table-striped">
       <tr>
-        <th>Id</th>
         <th>Imię</th>
         <th>Nazwisko</th>
         <th>Akcje</th>
       </tr>
       <tr th:each="d : ${drivers}">
-        <td th:text="${d.id}"></td>
         <td th:text="${d.firstName}"></td>
         <td th:text="${d.lastName}"></td>
         <td><a th:href="@{/driver/removeDriver/{id}(id=${d.id})}">
