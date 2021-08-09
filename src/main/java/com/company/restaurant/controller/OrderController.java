@@ -91,7 +91,7 @@ public class OrderController {
     public String removeOrder(@PathVariable("id") long id){
         orderService.deleteOrderById(id);
         logger.info("Try remove order having id: " + id);
-        return "redirect:http://localhost:8080/order/orders";
+        return "redirect:/order/orders";
     }
 
     @GetMapping(value = "editOrder/{id}")
@@ -112,6 +112,6 @@ public class OrderController {
     public String setStatusToCompleted(@PathVariable("id") long id) throws Exception {
         orderService.findOrderById(id).get().setStatus(OrderStatus.COMPLETED);
         logger.info("Order " + id + " status: " + orderService.findOrderById(id).get().getStatus());
-        return "redirect:http://localhost:8080/order/orders";
+        return "redirect:/order/orders";
     }
 }

@@ -38,7 +38,7 @@ public class DriverController {
     @GetMapping("/removeDriver/{id}")
     public String removeDriver(@PathVariable("id") Long id){
         driverService.deleteDriverById(id);
-        return "redirect:http://localhost:8080/driver/allDrivers";
+        return "redirect:/driver/allDrivers";
     }
 
     @GetMapping("/addOrder/{orderId}/toDriver/{driverId}")
@@ -48,6 +48,6 @@ public class DriverController {
         driver.getOrders().add(order);
         order.setDriver(driver);
         driverService.saveDriver(driver);
-        return "redirect:http://localhost:8080/order/orders";
+        return "redirect:/order/orders";
     }
 }
