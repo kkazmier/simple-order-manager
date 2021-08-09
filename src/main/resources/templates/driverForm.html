@@ -10,8 +10,8 @@
     <form action="#" th:action="@{/driver/driverForm}" th:object="${driver}" method="post">
         <p>imię: <input type="text" th:field="*{firstName}"></p>
         <p>nazwisko: <input type="text" th:field="*{lastName}"></p>
-        <p><input type="submit" value="Dodaj kierowcę"/> <input type="reset" value="Wyczyść pola"></p>
-        <a href="/driver/allDrivers"><button class="btn btn-default">Anuluj</button></a>
+        <p><input type="submit" class="btn btn-primary btn-lg" value="Dodaj kierowcę"/> <input type="reset" class="btn btn-primary btn-lg" value="Wyczyść pola"></p>
     </form>
+    <a href="drivers.html" th:href="@{/driver/allDrivers}"><button type="button" class="btn btn-lg btn-secondary btn-block">Anuluj</button></a>
 </body>
 </html>
