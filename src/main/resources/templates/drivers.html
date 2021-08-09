@@ -21,7 +21,7 @@
         <td th:text="${d.id}"></td>
         <td th:text="${d.firstName}"></td>
         <td th:text="${d.lastName}"></td>
-        <td><a th:href="@{http://localhost:8080/driver/removeDriver/{id}(id=${d.id})}">
+        <td><a th:href="@{/driver/removeDriver/{id}(id=${d.id})}">
           <button type="button" class="btn btn-danger">Usuń</button></a>
         </td>
       </tr>
