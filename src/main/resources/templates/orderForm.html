@@ -10,16 +10,49 @@
 </head>
 
 <body>
-    <form id="newOrderForm" action="#" th:action="@{/order/orderForm}" th:object="${order}" method="post">
-        <p>Ulica: <input type="text" th:field="*{address.street}"></p>
-        <p>Numer budynku: <input type="text" th:field="*{address.buildingNumber}"></p>
-        <p>Numer mieszkania: <input type="text" th:field="*{address.flatNumber}"></p>
-        <p>Miasto: <input type="text" th:field="*{address.town}"></p>
-        <p>Kod pocztowy: <input type="text" th:field="*{address.postalCode}"></p>
+    <form class="col g-3 needs-validation" novalidate id="newOrderForm" action="#" th:action="@{/order/orderForm}" th:object="${order}" method="post">
+        <div class="col-3">
+            <div class="form-outline">
+                <label for="validationStreet" class="form-label">Ulica</label>
+                <input type="text" value="Ulica" class="form-control" id="validationStreet" required th:field="*{address.street}"/>
+                <div class="invalid-feedback">To pole nie może być puste!</div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-outline">
+                <label for="validationBuildingNumber" class="form-label">Numer budynku</label>
+                <input type="text" value="Ulica" class="form-control" id="validationBuildingNumber" required th:field="*{address.buildingNumber}"/>
+                <div class="invalid-feedback">To pole nie może być puste!</div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-outline">
+                <label for="validationFlatNumber" class="form-label">Numer mieszkania</label>
+                <input type="text" value="Ulica" class="form-control" id="validationFlatNumber" th:field="*{address.flatNumber}"/>
+<!--                <div class="invalid-feedback">To pole nie może być puste!</div>-->
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-outline">
+                <label for="validationStreet" class="form-label">Miasto</label>
+                <input type="text" value="Miasto" class="form-control" id="validationTown" required th:field="*{address.town}"/>
+                <div class="invalid-feedback">To pole nie może być puste!</div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-outline">
+                <label for="validationStreet" class="form-label">Kod pocztowy</label>
+                <input type="text" value="Kod pocztowy" class="form-control" id="validationPostalCode" th:field="*{address.postalCode}"/>
+                <div class="invalid-feedback">To pole nie może być puste!</div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="p-3 mb-2 bg-danger text-white">Czas dostawy i rodzaj jedzenia muszą być zaznaczone, żeby dodać zamówienie.</div>
+        </div>
 
         <label>Czas dostawy</label>
         <div>
-            <input type="radio" id="thirty" name="deliveryTime" value=1800 th:field="*{secondsToDelivery}">
+            <input type="radio" id="thirty" name="deliveryTime" value=1800 th:field="*{secondsToDelivery}" required>
             <label for="thirty">30 minut</label>
         </div>
         <div>
@@ -27,13 +60,13 @@
             <label for="sixty">60 minut</label>
         </div>
         <div>
-            <input type="radio" id="ninety" name="deliveryTime" value=5400 th:field="*{secondsToDelivery}" checked = "true">
+            <input type="radio" id="ninety" name="deliveryTime" value=5400 th:field="*{secondsToDelivery}">
             <label for="ninety">90 minut</label>
         </div>
 
         <label>Rodzaj jedzenia</label>
         <div>
-            <input type="radio" id="burger" name="foodType" value=BURGER th:field="*{foodType}">
+            <input type="radio" id="burger" name="foodType" value=BURGER th:field="*{foodType}" required>
             <label for="burger">burger</label>
         </div>
         <div>
@@ -41,12 +74,33 @@
             <label for="pizza">pizza</label>
         </div>
         <div>
-            <input type="radio" id="sushi" name="foodType" value=SUSHI th:field="*{foodType}" checked = "true">
+            <input type="radio" id="sushi" name="foodType" value=SUSHI th:field="*{foodType}">
             <label for="sushi">sushi</label>
         </div>
 
         <p><input id="submitNewOrder" class="btn btn-primary btn-lg" type="submit" value="Dodaj zamówienie"> <input type="reset" class="btn btn-primary btn-lg" value="Wyczyść pola" /></p>
         <a href="orders.html" th:href="@{/order/orders}"><button type="button" class="btn btn-lg btn-secondary btn-block">Anuluj</button></a>
     </form>
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
 </body>
 </html>

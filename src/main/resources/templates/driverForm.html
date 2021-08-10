@@ -7,11 +7,45 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="#" th:action="@{/driver/driverForm}" th:object="${driver}" method="post">
-        <p>imię: <input type="text" th:field="*{firstName}"></p>
-        <p>nazwisko: <input type="text" th:field="*{lastName}"></p>
+    <form class="col g-3 needs-validation" novalidate action="#" th:action="@{/driver/driverForm}" th:object="${driver}" method="post">
+        <div class="col-3">
+            <div class="form-outline">
+                <label for="validationFirstName" class="form-label">Imię</label>
+                <input type="text" value="Imię" class="form-control" id="validationFirstName" required th:field="*{firstName}"/>
+                <div class="invalid-feedback">To pole nie może być puste!</div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-outline">
+                <label for="validationLastName" class="form-label">Nazwisko</label>
+                <input type="text" value="Nazwisko" class="form-control" id="validationLastName" required th:field="*{lastName}"/>
+                <div class="invalid-feedback">To pole nie może być puste!</div>
+            </div>
+        </div>
         <p><input type="submit" class="btn btn-primary btn-lg" value="Dodaj kierowcę"/> <input type="reset" class="btn btn-primary btn-lg" value="Wyczyść pola"></p>
     </form>
     <a href="drivers.html" th:href="@{/driver/allDrivers}"><button type="button" class="btn btn-lg btn-secondary btn-block">Anuluj</button></a>
+
+    <script>
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
 </body>
 </html>
