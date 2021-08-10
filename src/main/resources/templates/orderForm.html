@@ -11,7 +11,7 @@
 
 <body>
     <form class="col g-3 needs-validation" novalidate id="newOrderForm" action="#" th:action="@{/order/orderForm}" th:object="${order}" method="post">
-        <div class="col-3">
+        <div class="col-6">
             <div class="form-outline">
                 <label for="validationStreet" class="form-label">Ulica</label>
                 <input type="text" value="Ulica" class="form-control" id="validationStreet" required th:field="*{address.street}"/>
