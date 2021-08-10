@@ -11,42 +11,42 @@
 
 <body>
     <form class="col g-3 needs-validation" novalidate id="newOrderForm" action="#" th:action="@{/order/orderForm}" th:object="${order}" method="post">
-        <div class="col-6">
+        <div class="col-9">
             <div class="form-outline">
                 <label for="validationStreet" class="form-label">Ulica</label>
                 <input type="text" value="Ulica" class="form-control" id="validationStreet" required th:field="*{address.street}"/>
                 <div class="invalid-feedback">To pole nie może być puste!</div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-9">
             <div class="form-outline">
                 <label for="validationBuildingNumber" class="form-label">Numer budynku</label>
                 <input type="text" value="Ulica" class="form-control" id="validationBuildingNumber" required th:field="*{address.buildingNumber}"/>
                 <div class="invalid-feedback">To pole nie może być puste!</div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-9">
             <div class="form-outline">
                 <label for="validationFlatNumber" class="form-label">Numer mieszkania</label>
                 <input type="text" value="Ulica" class="form-control" id="validationFlatNumber" th:field="*{address.flatNumber}"/>
 <!--                <div class="invalid-feedback">To pole nie może być puste!</div>-->
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-9">
             <div class="form-outline">
                 <label for="validationStreet" class="form-label">Miasto</label>
                 <input type="text" value="Miasto" class="form-control" id="validationTown" required th:field="*{address.town}"/>
                 <div class="invalid-feedback">To pole nie może być puste!</div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-9">
             <div class="form-outline">
                 <label for="validationStreet" class="form-label">Kod pocztowy</label>
                 <input type="text" value="Kod pocztowy" class="form-control" id="validationPostalCode" th:field="*{address.postalCode}"/>
                 <div class="invalid-feedback">To pole nie może być puste!</div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-9">
             <div class="p-3 mb-2 bg-danger text-white">Czas dostawy i rodzaj jedzenia muszą być zaznaczone, żeby dodać zamówienie.</div>
         </div>
 
