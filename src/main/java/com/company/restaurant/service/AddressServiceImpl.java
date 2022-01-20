@@ -6,9 +6,11 @@ import com.company.restaurant.repository.AddressRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -18,12 +20,15 @@ import java.util.Optional;
 
 @Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService{
     private final Logger logger = LoggerFactory.getLogger(AddressServiceImpl.class);
     private final AddressRepository addressRepository;
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+    @Autowired
+    private Environment env;
 
     public Address save(Address address) {
         logger.info("Address saved.");
@@ -43,9 +48,11 @@ public class AddressServiceImpl implements AddressService{
     }
 
     public void setGeographicalCoords(Long id) throws Exception {
+        final String locationIqBasePath = env.getProperty("locationiq.basepath");
+        final String locationIqKey = env.getProperty("locationiq.key");
         Address address = findById(id).orElseThrow(Exception::new);
         logger.info(address.toString());
-        String url = "https://eu1.locationiq.com/v1/search.php?key=pk.c5f4b42b05bfdb2f033d3be0590472cd&q="
+        String url = locationIqBasePath + "search.php?key=" + locationIqKey + "&q="
                 + address.getStreet() + "," + address.getBuildingNumber() + "," + address.getTown() + "&format=json";
         logger.info(url);
 //        final WebClient webClient = WebClient.create(url);
