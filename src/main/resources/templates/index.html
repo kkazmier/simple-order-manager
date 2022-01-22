@@ -8,29 +8,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Simple order manager main page</title>
     <style>
-        div.btn-group-vertical{
+<!--        div.btn-group-vertical{-->
 
-        }
-        h1{
-            margin: 10px;
-            width: 500%;
-            font-size: 64px;
-        }
-        .btn{
-            margin: 10px;
-            width: 200%;
-        }
+<!--        }-->
+<!--        h1{-->
+<!--            margin: 10px;-->
+<!--            width: 500%;-->
+<!--            font-size: 64px;-->
+<!--        }-->
+<!--        .btn{-->
+<!--            margin: 10px;-->
+<!--            width: 200%;-->
+<!--        }-->
 
     </style>
 </head>
 
 <body>
-    <h1>Menu</h1>
-    <div class="btn-group-vertical container">
-        <a href="orders.html" th:href="@{/order/orders}"><button type="button" class="btn btn-lg btn-primary btn-block">Zamówienia</button></a>
-        <a href="drivers.html" th:href="@{/driver/allDrivers}"><button type="button" class="btn btn-lg btn-primary btn-block">Kierowcy</button></a>
-        <a href="streetMap.html" th:href="@{/streetMap/map}"><button type="button" class="btn btn-lg btn-primary btn-block">Mapa</button></a>
+<div class="card" style="width: 36rem;">
+    <div class="card-header">
+        <h1 display-1 font-weight-bold>Menu</h1>
     </div>
-    </body>
+    <div class="card-body">
+        <div class="d-grid gap-2 col-12 mx-auto">
+
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="orders.html" th:href="@{/order/orders}">
+                        <button type="button" class="btn btn-lg btn-primary">Zamówienia</button></a></li>
+                <li class="list-group-item">
+                    <a href="drivers.html" th:href="@{/driver/allDrivers}">
+                        <button type="button" class="btn btn-lg btn-primary">Kierowcy</button></a>
+                </li>
+                <li class="list-group-item">
+                    <a href="streetMap.html" th:href="@{/streetMap/map}">
+                        <button type="button" class="btn btn-lg btn-primary">Mapa</button></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+
+</body>
 
 </html>
