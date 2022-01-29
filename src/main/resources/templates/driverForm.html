@@ -3,28 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <title>Title</title>
 </head>
 <body>
-    <form class="col g-3 needs-validation" novalidate action="#" th:action="@{/driver/driverForm}" th:object="${driver}" method="post">
-        <div class="col-3">
+    <form class="col g-5 needs-validation" novalidate action="#" th:action="@{/driver/driverForm}" th:object="${driver}" method="post">
+        <div class="col-5">
             <div class="form-outline">
                 <label for="validationFirstName" class="form-label">Imię</label>
                 <input type="text" value="Imię" class="form-control" id="validationFirstName" required th:field="*{firstName}"/>
                 <div class="invalid-feedback">To pole nie może być puste!</div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-5">
             <div class="form-outline">
                 <label for="validationLastName" class="form-label">Nazwisko</label>
                 <input type="text" value="Nazwisko" class="form-control" id="validationLastName" required th:field="*{lastName}"/>
                 <div class="invalid-feedback">To pole nie może być puste!</div>
             </div>
         </div>
-        <p><input type="submit" class="btn btn-primary btn-lg" value="Dodaj kierowcę"/> <input type="reset" class="btn btn-primary btn-lg" value="Wyczyść pola"></p>
+        <div>
+            <p>   </p>
+        </div>
+        <p>
+            <input type="submit" class="btn btn-primary btn-lg" value="Dodaj kierowcę"/>
+            <input type="reset" class="btn btn-info btn-lg" value="Wyczyść pola">
+            <a href="drivers.html" th:href="@{/driver/allDrivers}"><button type="button" class="btn btn-lg btn-secondary">Anuluj</button></a>
+        </p>
     </form>
-    <a href="drivers.html" th:href="@{/driver/allDrivers}"><button type="button" class="btn btn-lg btn-secondary btn-block">Anuluj</button></a>
 
     <script>
         (function () {
