@@ -8,8 +8,10 @@ Orders are deliver by drivers group, collective to mentioned above restaurants.
 - Spring Data JPA
 - Postgres
 - Gradle
+- LocationIQ
 - Thymeleaf
-- locationIQ
+- Bootstrap
+
 ## Run application
 To run program type ```gradle bootRun``` in command line console, in project folder.
 ## Screenshots
